@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}页面未找到 | {{ config.site.title }}{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <span class="eyebrow">404</span>
+  <h1>这页暂时不在这里</h1>
+  <p>可能是链接写错了，也可能是内容刚刚被整理过。</p>
+  <a class="button primary" href="{{ site_url('/') }}">回到首页</a>
+</section>
+{% endblock %}

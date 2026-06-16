@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}搜索 | {{ config.site.title }}{% endblock %}
+{% block description %}搜索文章、作品和页面{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <span class="eyebrow">Search</span>
+  <h1>搜索站内内容</h1>
+  <p>支持按标题、摘要、正文和标签快速筛选。</p>
+</section>
+
+<section class="search-panel">
+  <label class="search-box" for="search-input">
+    <span>搜索关键词</span>
+    <input id="search-input" type="search" placeholder="试试输入：Markdown、作品、设计、随笔" autocomplete="off">
+  </label>
+  <div class="search-results" data-search-results>
+    <p class="empty-state">输入关键词后，结果会显示在这里。</p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ site_url('/static/js/search.js') }}" defer></script>
+{% endblock %}

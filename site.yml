@@ -1,0 +1,50 @@
+site:
+  title: "林间手记"
+  description: "一个关于产品、代码、生活观察与个人作品的清爽博客。"
+  author: "你的名字"
+  email: "hello@example.com"
+  base_url: ""
+  language: "zh-CN"
+  locale: "zh_CN"
+  tagline: "写文章、做作品、认真生活。"
+  footer_note: "长期更新写作、项目记录与个人思考。"
+
+hero:
+  eyebrow: "Personal Blog"
+  title: "博客、介绍与作品集，都放在一个安静的地方。"
+  intro: "这里可以用来发布 Markdown 文章、整理个人经历、展示代表作品，也能作为你在互联网上的一张清爽名片。"
+  primary_label: "查看文章"
+  primary_link: "/posts/"
+  secondary_label: "认识我"
+  secondary_link: "/about/"
+
+social:
+  - label: "GitHub"
+    url: "https://github.com/your-name"
+  - label: "X"
+    url: "https://x.com/your-name"
+  - label: "Email"
+    url: "mailto:hello@example.com"
+
+newsletter:
+  enabled: true
+  title: "订阅更新"
+  description: "后续你可以把这里接到 Buttondown、Mailchimp、Substack，或者先保留为 RSS 订阅入口。"
+  button_text: "订阅或查看 RSS"
+  action_url: "/rss.xml"
+
+comments:
+  enabled: false
+  provider: "giscus"
+  repo: "your-name/your-blog-repo"
+  repo_id: "REPLACE_ME"
+  category: "Announcements"
+  category_id: "REPLACE_ME"
+  mapping: "pathname"
+  theme: "preferred_color_scheme"
+
+analytics:
+  enabled: false
+  provider: "plausible"
+  script_url: "https://plausible.io/js/script.js"
+  domain: "example.com"

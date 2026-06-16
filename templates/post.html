@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} | {{ config.site.title }}{% endblock %}
+{% block description %}{{ item.summary }}{% endblock %}
+{% block content %}
+<article class="article-shell">
+  <header class="article-header">
+    <div class="card-meta">
+      <a href="{{ site_url('/categories/' ~ slugify(item.category or '未分类') ~ '/') }}">{{ item.category or '未分类' }}</a>
+      {% if item.date %}<time datetime="{{ item.date.isoformat() }}">{{ item.date.strftime("%Y-%m-%d") }}</time>{% endif %}
+      <span>{{ item.reading_time }} 分钟</span>
+    </div>
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.summary }}</p>
+    <div class="tag-row">
+      {% for tag in item.tags %}
+      <a class="tag" href="{{ site_url('/tags/' ~ slugify(tag) ~ '/') }}">#{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </header>
+
+  <div class="article-layout">
+    <div class="prose">
+      {{ item.html | safe }}
+    </div>
+    <aside class="sidebar-card sticky">
+      <h3>继续阅读</h3>
+      {% for post in related_posts %}
+      <a class="related-link" href="{{ site_url(post.url) }}">{{ post.title }}</a>
+      {% endfor %}
+    </aside>
+  </div>
+
+  {% if config.comments.enabled and config.comments.provider == 'giscus' %}
+  <section class="comments-block">
+    <h2>评论</h2>
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ config.comments.repo }}"
+            data-repo-id="{{ config.comments.repo_id }}"
+            data-category="{{ config.comments.category }}"
+            data-category-id="{{ config.comments.category_id }}"
+            data-mapping="{{ config.comments.mapping }}"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="{{ config.comments.theme }}"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </section>
+  {% endif %}
+</article>
+{% endblock %}

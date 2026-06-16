@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} | {{ config.site.title }}{% endblock %}
+{% block description %}{{ page_description }}{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <span class="eyebrow">Projects</span>
+  <h1>{{ page_title }}</h1>
+  <p>{{ page_description }}</p>
+</section>
+
+<div class="project-grid wide">
+  {% for project in projects %}
+  <article class="project-card">
+    <span class="project-kicker">{{ project.meta.get('role', '个人项目') }}</span>
+    <h2><a href="{{ site_url(project.url) }}">{{ project.title }}</a></h2>
+    <p>{{ project.summary }}</p>
+    <div class="project-links">
+      {% if project.meta.get('stack') %}
+      <span>{{ project.meta.stack }}</span>
+      {% endif %}
+      {% if project.meta.get('demo_url') %}
+      <a href="{{ project.meta.demo_url }}" target="_blank" rel="noreferrer">演示</a>
+      {% endif %}
+      {% if project.meta.get('repo_url') %}
+      <a href="{{ project.meta.repo_url }}" target="_blank" rel="noreferrer">代码</a>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

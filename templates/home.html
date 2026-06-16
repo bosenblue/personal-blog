@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}{{ config.site.title }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">{{ config.hero.eyebrow }}</span>
+    <h1>{{ config.hero.title }}</h1>
+    <p>{{ config.hero.intro }}</p>
+    <div class="hero-actions">
+      <a class="button primary" href="{{ site_url(config.hero.primary_link) }}">{{ config.hero.primary_label }}</a>
+      <a class="button secondary" href="{{ site_url(config.hero.secondary_link) }}">{{ config.hero.secondary_label }}</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="hero-card">
+      <span>文章</span>
+      <strong>{{ total_posts }}</strong>
+      <p>支持 Markdown 写作、代码高亮、分类和标签。</p>
+    </div>
+    <div class="hero-card">
+      <span>作品</span>
+      <strong>{{ total_projects }}</strong>
+      <p>展示项目背景、过程、截图、结果与复盘。</p>
+    </div>
+    <div class="hero-card">
+      <span>订阅</span>
+      <strong>RSS</strong>
+      <p>先用最稳定的内容订阅方式，后续可接入邮件订阅。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-grid">
+  <div class="section-heading">
+    <h2>精选文章</h2>
+    <a href="{{ site_url('/posts/') }}">查看全部</a>
+  </div>
+  <div class="card-grid">
+    {% for post in featured_posts %}
+    <article class="card">
+      <div class="card-meta">
+        <span>{{ post.category or '未分类' }}</span>
+        {% if post.date %}<time datetime="{{ post.date.isoformat() }}">{{ post.date.strftime("%Y-%m-%d") }}</time>{% endif %}
+      </div>
+      <h3><a href="{{ site_url(post.url) }}">{{ post.title }}</a></h3>
+      <p>{{ post.summary }}</p>
+      <div class="tag-row">
+        {% for tag in post.tags[:3] %}
+        <a class="tag" href="{{ site_url('/tags/' ~ slugify(tag) ~ '/') }}">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-grid alt">
+  <div class="section-heading">
+    <h2>代表作品</h2>
+    <a href="{{ site_url('/projects/') }}">查看更多</a>
+  </div>
+  <div class="project-grid">
+    {% for project in featured_projects %}
+    <article class="project-card">
+      <span class="project-kicker">{{ project.meta.get('role', '个人项目') }}</span>
+      <h3><a href="{{ site_url(project.url) }}">{{ project.title }}</a></h3>
+      <p>{{ project.summary }}</p>
+      <div class="project-links">
+        {% if project.meta.get('demo_url') %}
+        <a href="{{ project.meta.demo_url }}" target="_blank" rel="noreferrer">查看演示</a>
+        {% endif %}
+        {% if project.meta.get('repo_url') %}
+        <a href="{{ project.meta.repo_url }}" target="_blank" rel="noreferrer">查看代码</a>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-grid">
+  <div class="section-heading">
+    <h2>最新更新</h2>
+    <a href="{{ site_url('/search/') }}">试试搜索</a>
+  </div>
+  <div class="timeline">
+    {% for post in latest_posts %}
+    <article class="timeline-item">
+      <time datetime="{{ post.date.isoformat() if post.date else '' }}">{{ post.date.strftime("%Y-%m-%d") if post.date else '待发布' }}</time>
+      <div>
+        <h3><a href="{{ site_url(post.url) }}">{{ post.title }}</a></h3>
+        <p>{{ post.summary }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% if config.newsletter.enabled %}
+<section class="newsletter">
+  <div>
+    <span class="eyebrow">Stay in Touch</span>
+    <h2>{{ config.newsletter.title }}</h2>
+    <p>{{ config.newsletter.description }}</p>
+  </div>
+  <a class="button primary" href="{{ config.newsletter.action_url }}">{{ config.newsletter.button_text }}</a>
+</section>
+{% endif %}
+{% endblock %}

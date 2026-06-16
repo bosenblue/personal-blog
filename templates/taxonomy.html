@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }} | {{ config.site.title }}{% endblock %}
+{% block description %}浏览 {{ heading }}{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <span class="eyebrow">Explore</span>
+  <h1>{{ heading }}</h1>
+  <p>快速找到你想看的主题内容。</p>
+</section>
+
+<section class="taxonomy-board">
+  {% for name, items in taxonomy.items() %}
+  <article class="taxonomy-card">
+    <h2><a href="{{ site_url('/' ~ taxonomy_path ~ '/' ~ slugify(name) ~ '/') }}">{{ name }}</a></h2>
+    <p>{{ items|length }} 篇内容</p>
+    <div class="mini-list">
+      {% for item in items[:3] %}
+      <a href="{{ site_url(item.url) }}">{{ item.title }}</a>
+      {% endfor %}
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}
