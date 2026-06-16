@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} | {{ config.site.title }}{% endblock %}
+{% block description %}{{ item.summary }}{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <span class="eyebrow">Profile</span>
+  <h1>{{ item.title }}</h1>
+  <p>{{ item.summary }}</p>
+</section>
+
+<article class="prose standalone">
+  {{ item.html | safe }}
+</article>
+{% endblock %}

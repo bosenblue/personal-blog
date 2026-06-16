@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} | {{ config.site.title }}{% endblock %}
+{% block description %}{{ page_description }}{% endblock %}
+{% block content %}
+<section class="page-hero">
+  <span class="eyebrow">Writing</span>
+  <h1>{{ page_title }}</h1>
+  <p>{{ page_description }}</p>
+</section>
+
+<section class="post-layout">
+  <div class="post-stream">
+    {% for post in posts %}
+    <article class="post-card">
+      <div class="card-meta">
+        <span>{{ post.category or '未分类' }}</span>
+        {% if post.date %}<time datetime="{{ post.date.isoformat() }}">{{ post.date.strftime("%Y-%m-%d") }}</time>{% endif %}
+        <span>{{ post.reading_time }} 分钟</span>
+      </div>
+      <h2><a href="{{ site_url(post.url) }}">{{ post.title }}</a></h2>
+      <p>{{ post.summary }}</p>
+      <div class="tag-row">
+        {% for tag in post.tags %}
+        <a class="tag" href="{{ site_url('/tags/' ~ slugify(tag) ~ '/') }}">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  <aside class="sidebar-card">
+    <h3>按分类浏览</h3>
+    <div class="taxonomy-links">
+      {% for name, items in categories.items() %}
+      <a href="{{ site_url('/categories/' ~ slugify(name) ~ '/') }}">{{ name }} <small>{{ items|length }}</small></a>
+      {% endfor %}
+    </div>
+    <h3>常用标签</h3>
+    <div class="tag-row">
+      {% for name, items in tags.items() %}
+      <a class="tag" href="{{ site_url('/tags/' ~ slugify(name) ~ '/') }}">#{{ name }} ({{ items|length }})</a>
+      {% endfor %}
+    </div>
+  </aside>
+</section>
+{% endblock %}

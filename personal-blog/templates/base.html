@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ config.site.language }}" data-base-url="{{ config.site.base_url or '' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ config.site.title }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ config.site.description }}{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ site_url('/static/css/site.css') }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ config.site.title }} RSS" href="{{ site_url('/rss.xml') }}">
+  {% if config.analytics.enabled %}
+  <script defer data-domain="{{ config.analytics.domain }}" src="{{ config.analytics.script_url }}"></script>
+  {% endif %}
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="{{ site_url('/') }}">
+        <span class="brand-mark">LJ</span>
+        <span>
+          <strong>{{ config.site.title }}</strong>
+          <small>{{ config.site.tagline }}</small>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="{{ site_url('/') }}" {% if current_path == '/' %}aria-current="page"{% endif %}>首页</a>
+        <a href="{{ site_url('/posts/') }}" {% if current_path.startswith('/posts/') %}aria-current="page"{% endif %}>文章</a>
+        <a href="{{ site_url('/projects/') }}" {% if current_path.startswith('/projects/') %}aria-current="page"{% endif %}>作品</a>
+        <a href="{{ site_url('/about/') }}" {% if current_path.startswith('/about/') %}aria-current="page"{% endif %}>关于</a>
+        <a href="{{ site_url('/search/') }}" {% if current_path.startswith('/search/') %}aria-current="page"{% endif %}>搜索</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle>切换主题</button>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>{{ config.site.title }}</strong>
+        <p>{{ config.site.footer_note }}</p>
+      </div>
+      <div class="footer-links">
+        <a href="{{ site_url('/rss.xml') }}">RSS</a>
+        <a href="{{ site_url('/categories/') }}">分类</a>
+        <a href="{{ site_url('/tags/') }}">标签</a>
+      </div>
+      <div class="social-links">
+        {% for link in config.social %}
+        <a href="{{ link.url }}" target="_blank" rel="noreferrer">{{ link.label }}</a>
+        {% endfor %}
+      </div>
+    </footer>
+  </div>
+  <script src="{{ site_url('/static/js/site.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} | {{ config.site.title }}{% endblock %}
+{% block description %}{{ item.summary }}{% endblock %}
+{% block content %}
+<article class="article-shell">
+  <header class="article-header">
+    <span class="eyebrow">{{ item.meta.get('role', '个人项目') }}</span>
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.summary }}</p>
+    <div class="project-links">
+      {% if item.meta.get('stack') %}
+      <span>{{ item.meta.stack }}</span>
+      {% endif %}
+      {% if item.meta.get('demo_url') %}
+      <a href="{{ item.meta.demo_url }}" target="_blank" rel="noreferrer">查看演示</a>
+      {% endif %}
+      {% if item.meta.get('repo_url') %}
+      <a href="{{ item.meta.repo_url }}" target="_blank" rel="noreferrer">查看代码</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="prose standalone">
+    {{ item.html | safe }}
+  </div>
+</article>
+{% endblock %}

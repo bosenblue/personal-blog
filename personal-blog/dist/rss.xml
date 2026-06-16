@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>林间手记</title>
+    <link>/</link>
+    <description>一个关于产品、代码、生活观察与个人作品的清爽博客。</description>
+    <lastBuildDate>Tue, 16 Jun 2026 10:00:00 +0800</lastBuildDate>
+    <item>
+        <title>欢迎来到我的新博客</title>
+        <link>/posts/welcome/</link>
+        <guid>/posts/welcome/</guid>
+        <description>这是博客的第一篇文章，用来说明这个网站会写什么、怎么更新，以及为什么选择用 Markdown 维护。</description>
+        <pubDate>Tue, 16 Jun 2026 10:00:00 +0800</pubDate>
+      </item> <item>
+        <title>我准备怎样维护这个博客</title>
+        <link>/posts/writing-workflow/</link>
+        <guid>/posts/writing-workflow/</guid>
+        <description>先把写作流程做得简单，才更容易长期坚持。这里记录我准备采用的博客维护方式。</description>
+        <pubDate>Mon, 15 Jun 2026 19:30:00 +0800</pubDate>
+      </item>
+  </channel>
+</rss>
